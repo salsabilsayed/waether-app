@@ -1,0 +1,145 @@
+body{
+    font-family:  'Roboto', sans-serif;
+}
+
+.navbar{
+    background-color: #1e202b;
+}
+.navbar-brand{
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.logo-text{
+    color:#bfc1c8;
+    font-size: 10px;
+    margin-bottom: 0;
+}
+.navbar-nav{
+    background-color: #262936;
+    border-radius: 20px;
+    text-align: center;
+    margin:30px 0;
+}
+.nav-item{
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    padding: 10px 0;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    transition: 0.3s all;
+}
+.nav-link{
+    color: #fff;
+   display: inline-block;
+    
+}
+.navbar-toggler-icon i{
+    color:#fff;
+}
+.active a{
+    color: #009ad8;
+}
+@media screen and (min-width:992px){
+    .navbar-nav{
+        background-color: transparent;
+        border-radius: 0;
+        margin:0;
+    }
+    .nav-item{
+        margin-left: 5px;
+        padding:0 15px;
+    }
+    .nav-link{
+        font-size: 15px;
+        padding:0 15px;
+    }
+    .nav-item:hover, .active {
+        border-color: #009ad8;
+    }
+    .nav-item:hover a{
+        color:#009ad8;
+    }
+    
+}
+/* main section */
+section{
+    background-image: url('../images/banner.png');
+    background-repeat: no-repeat;
+    background-color: #1e202b;
+}
+.main-box{
+    border-radius: 10px;
+    overflow: hidden;
+}
+.input-container{
+    background-color: #1e202b;
+    padding: 5px 5px 5px 15px;
+    border-radius: 30px;
+}
+.btn{
+    padding: 10px 35px;
+    border-radius: 30px;
+}
+input{
+    background-color: #1e202b;
+    outline: none;
+    border: none;
+}
+input:focus{
+    color: #fff;
+}
+.currentWeatherBox, .thirdDay{
+    background-color: #333647;
+}
+h1{
+    font-size: 5rem;
+    font-weight: bold;
+    padding: 20px 0 30px;
+}
+.nextDay{
+    background-color: #242633;
+}
+.Text{
+    font-size: 14px;
+    color:#009ad8;
+}
+#tomorrow{
+    background-color: #1e202b;
+}
+#afterTomorrow, .date{
+    background-color: #2b2e3d;
+}
+/* footer section */
+footer{
+    background-color: #262936;
+}
+footer i{
+    color: #009ad8;
+    font-size: 20px;
+}
+
+footer .icon{
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1e202b;
+}
+footer .icon:hover i{
+    color:#fff;
+    
+}
+footer .icon:hover{
+    background-color: #009ad8;
+}
+footer p{
+    font-size: 14px;
+    color:#bfc1c8
+}
+@media screen and (min-width:992px){
+    footer .input-container{
+        width:65%;
+    }
+    footer .social{
+        width:25%;
+    }
+}
