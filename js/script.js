@@ -12,16 +12,13 @@ const dayMonth = document.getElementById('date');
 async function search(cityvalue) {
     
     let response = await fetch(`https://api.weatherapi.com/v1/search.json?key=${apiKey}&q=${cityvalue}`);
-    responseFetch(response);
-};
-
-
-
-async function responseFetch(response){
     let responseData = await response.json();
     let cityName = responseData[0].name.split(',')[0];
-    
+    forecasting(cityName);
+};
 
+async function forecasting(cityName){
+    
     let forecast = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=3`)
     let responseForecast = await forecast.json();
 
@@ -32,7 +29,6 @@ async function responseFetch(response){
    
     displayData(responseForecast);
 }
-
 
 function displayData(data){
     let currentDayData = data.current;
