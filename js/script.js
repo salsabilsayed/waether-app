@@ -36,7 +36,7 @@ function displayData(data){
     <h5 class="text-secondary">${data.location.name}</h5>
     <div class="d-flex align-items-center justify-content-between">
         <h1 class="text-white">${currentDayData.temp_c}<sup>o</sup>C</h1>
-        <img src = "${currentDayData.condition.icon}" alt = "icon photo">
+        <img src = "https:${currentDayData.condition.icon}" alt = "icon photo">
     </div>
     <p class="Text">${currentDayData.condition.text}</p>`;
     
@@ -44,14 +44,14 @@ function displayData(data){
 
     let nextDayData = data.forecast.forecastday[1].day;
     nextDayWeather.innerHTML = `
-    <img src = "${nextDayData.condition.icon}" alt = "nextday icon photo">
+    <img src = "https:${nextDayData.condition.icon}" alt = "nextday icon photo">
     <h4 class="text-white pt-4 font-weight-bold">${nextDayData.maxtemp_c}<sup>o</sup>C</h4>
     <p class="text-secondary">${nextDayData.mintemp_c}<sup>o</sup></p>
     <p class="Text">${nextDayData.condition.text}</p>`;
 
     let thirdDayData = data.forecast.forecastday[2].day;
     thirdDayWeather.innerHTML = `
-    <img src = "${thirdDayData.condition.icon}" alt = "nextday icon photo">
+    <img src = "https:${thirdDayData.condition.icon}" alt = "nextday icon photo">
     <h4 class="text-white pt-4 font-weight-bold">${thirdDayData.maxtemp_c}<sup>o</sup>C</h4>
     <p class="text-secondary">${thirdDayData.mintemp_c}<sup>o</sup></p>
     <p class="Text">${thirdDayData.condition.text}</p>`;
