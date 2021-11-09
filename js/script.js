@@ -8,6 +8,12 @@ const Tomorrow = document.getElementById('tomorrow');
 const AfterTomorrow = document.getElementById('afterTomorrow');
 const dayMonth = document.getElementById('date');
 
+//date variables
+const date = new Date();
+const weekDays = ['Sunday','Monday','Tuesday','Wednesday','Thuresday','Friday','Saturday'];
+const monthName = ['Jan','Feb','March','April','May','June','July','Aug','Spet','Oct','Nov','Dec'];
+
+
 // data from API
 async function search(cityvalue) {
     
@@ -77,42 +83,17 @@ function displaythirdDay(data){
 }
 
 // displaying dates
-function displayDates(responseForecast){
+function displayDates(){
 
-    const tomorrowDate = new Date(responseForecast.forecast.forecastday[1].date).toString().split(' ')[0];
-    const afterTomorrowDate = new Date(responseForecast.forecast.forecastday[2].date).toString().split(' ')[0];
+    const month = date.getMonth();
+    const day = date.getDate();
 
-    let today = new Date().toString().split(' ');
-    Today.innerHTML = displayDays(today[0]);
-   
-    dayMonth.innerHTML = today[2] + today[1];
-  
-    Tomorrow.innerHTML = displayDays(tomorrowDate);
-    AfterTomorrow.innerHTML = displayDays(afterTomorrowDate);
+    Today.innerHTML = weekDays[date.getDay()];
+    dayMonth.innerHTML = day + monthName[month];
+    Tomorrow.innerHTML = weekDays[date.getDay()+1];
+    AfterTomorrow.innerHTML = weekDays[date.getDay()+2];
 }
 
-function displayDays(day){
-    switch(day){
-        case "Sun":
-        case "Mon":
-        case "Fri":
-            day = day+"day";
-            break;
-        case "Sat":
-            day = day+"erday";
-            break;
-        case "Tue":
-            day = day+"sday";
-            break;
-        case "Wed":
-            day = day+"nesday";
-            break;
-        case "Thu":
-            day = day+"rsday";
-            break;
-    }
-    return day;
-}
 
 search('cairo');
 searchInput.addEventListener('keyup', function(){
