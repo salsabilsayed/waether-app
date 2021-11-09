@@ -8,7 +8,7 @@ const Tomorrow = document.getElementById('tomorrow');
 const AfterTomorrow = document.getElementById('afterTomorrow');
 const dayMonth = document.getElementById('date');
 
-
+// data from API
 async function search(cityvalue) {
     
     let response = await fetch(`https://api.weatherapi.com/v1/search.json?key=${apiKey}&q=${cityvalue}`);
@@ -19,51 +19,76 @@ async function search(cityvalue) {
 
 async function forecasting(cityName){
     
-    let forecast = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=3`)
-    let responseForecast = await forecast.json();
+    const forecast = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=3`)
+    const responseForecast = await forecast.json();
 
-    
-    let tomorrowDate = new Date(responseForecast.forecast.forecastday[1].date).toString().split(' ')[0];
-    let afterTomorrowDate = new Date(responseForecast.forecast.forecastday[2].date).toString().split(' ')[0];
-    displayDates(tomorrowDate,afterTomorrowDate);
+    displayDates(responseForecast);
    
     displayData(responseForecast);
 }
 
+/// display data functions
 function displayData(data){
-    let currentDayData = data.current;
+    
+    displayCurrentDay(data);
+    displayNextDay(data);
+    displaythirdDay(data);
+}
+
+
+// data for tody
+function displayCurrentDay(data){
+    const currentDayData = data.current;
+    const {temp_c, condition} = currentDayData
+
     currentWeather.innerHTML = `
     <h5 class="text-secondary">${data.location.name}</h5>
     <div class="d-flex align-items-center justify-content-between">
-        <h1 class="text-white">${currentDayData.temp_c}<sup>o</sup>C</h1>
-        <img src = "https:${currentDayData.condition.icon}" alt = "icon photo">
+        <h1 class="text-white">${temp_c}<sup>o</sup>C</h1>
+        <img src = "https:${condition.icon}" alt = "icon photo">
     </div>
-    <p class="Text">${currentDayData.condition.text}</p>`;
-    
-
-
-    let nextDayData = data.forecast.forecastday[1].day;
-    nextDayWeather.innerHTML = `
-    <img src = "https:${nextDayData.condition.icon}" alt = "nextday icon photo">
-    <h4 class="text-white pt-4 font-weight-bold">${nextDayData.maxtemp_c}<sup>o</sup>C</h4>
-    <p class="text-secondary">${nextDayData.mintemp_c}<sup>o</sup></p>
-    <p class="Text">${nextDayData.condition.text}</p>`;
-
-    let thirdDayData = data.forecast.forecastday[2].day;
-    thirdDayWeather.innerHTML = `
-    <img src = "https:${thirdDayData.condition.icon}" alt = "nextday icon photo">
-    <h4 class="text-white pt-4 font-weight-bold">${thirdDayData.maxtemp_c}<sup>o</sup>C</h4>
-    <p class="text-secondary">${thirdDayData.mintemp_c}<sup>o</sup></p>
-    <p class="Text">${thirdDayData.condition.text}</p>`;
+    <p class="Text">${condition.text}</p>`;
 }
 
-function displayDates(tomorrow,afterTomorrow){
-    let today = new Date().toString().split(' ');
+// data for next day
+function displayNextDay(data){
 
+    const nextDayData = data.forecast.forecastday[1].day;
+    const {condition, maxtemp_c, mintemp_c} = nextDayData;
+
+    nextDayWeather.innerHTML = `
+    <img src = "https:${condition.icon}" alt = "nextday icon photo">
+    <h4 class="text-white pt-4 font-weight-bold">${maxtemp_c}<sup>o</sup>C</h4>
+    <p class="text-secondary">${mintemp_c}<sup>o</sup></p>
+    <p class="Text">${condition.text}</p>`;
+
+}
+
+// data for third day
+function displaythirdDay(data){
+    const thirdDayData = data.forecast.forecastday[2].day;
+    const {condition, maxtemp_c, mintemp_c} = thirdDayData;
+
+    thirdDayWeather.innerHTML = `
+    <img src = "https:${condition.icon}" alt = "nextday icon photo">
+    <h4 class="text-white pt-4 font-weight-bold">${maxtemp_c}<sup>o</sup>C</h4>
+    <p class="text-secondary">${mintemp_c}<sup>o</sup></p>
+    <p class="Text">${condition.text}</p>`;
+}
+
+// displaying dates
+function displayDates(responseForecast){
+
+    const tomorrowDate = new Date(responseForecast.forecast.forecastday[1].date).toString().split(' ')[0];
+    const afterTomorrowDate = new Date(responseForecast.forecast.forecastday[2].date).toString().split(' ')[0];
+
+    let today = new Date().toString().split(' ');
     Today.innerHTML = displayDays(today[0]);
+   
     dayMonth.innerHTML = today[2] + today[1];
-    Tomorrow.innerHTML = displayDays(tomorrow);
-    AfterTomorrow.innerHTML = displayDays(afterTomorrow);
+  
+    Tomorrow.innerHTML = displayDays(tomorrowDate);
+    AfterTomorrow.innerHTML = displayDays(afterTomorrowDate);
 }
 
 function displayDays(day){
